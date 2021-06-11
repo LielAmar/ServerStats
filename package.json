@@ -1,5 +1,5 @@
 {
-  "name": "serverstatistics",
+  "name": "serverstats",
   "version": "1.0.0",
   "description": "A Statistics system to track players behavior in Gaming servers",
   "main": "server.js",
@@ -11,11 +11,12 @@
   },
   "keywords": [
     "statistics",
+    "stats",
     "servers"
   ],
   "repository": {
     "type": "github",
-    "url": "https://github.com/LielAmar/ServerStatistics"
+    "url": "https://github.com/LielAmar/ServerStats"
   },
   "author": "Liel Amar",
   "license": "GPL-3.0-or-later",
