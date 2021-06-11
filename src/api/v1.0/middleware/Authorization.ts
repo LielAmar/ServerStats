@@ -46,7 +46,7 @@ const cacheGameServersFile = async (): Promise<void> => {
  */
 export class Authorization {
   public async authorize(req: Request, res: Response, next: NextFunction) {
-    const { token } = req.body;
+    const token = req.headers.authorization;
 
     if(!token) return res.status(400).json(createResponse(false, messages.missingRequestToken())); // If no token was provided
 

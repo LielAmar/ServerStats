@@ -37,6 +37,12 @@ export class StatisticsRoutes {
       this.controller.loadStatistics.bind(this.controller)
     );
 
+    /** Loads statistics of the given timestamp */
+    this._router.get("/:timestamp",
+      (req, res, next) => this.authorization.authorize(req, res, next),
+      this.controller.loadStatistics.bind(this.controller)
+    );
+
     /** Update statistics of today */
     this._router.put("/",
       (req, res, next) => this.authorization.authorize(req, res, next),

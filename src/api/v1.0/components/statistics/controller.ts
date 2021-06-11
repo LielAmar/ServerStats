@@ -19,10 +19,17 @@ export class StatisticsController {
   public async loadStatistics(req: Request, res: Response, next: NextFunction) {
     if(!req.serverToken || !req.serverData) return res.status(400).json(createResponse(false, messages.failedToLoadGameServerData()));
 
-    const { timestamp } = req.body;
+    let timestamp = req.params.timestamp ? parseInt(req.params.timestamp) * 1000 : Date.now();
 
-    const statistics = this.service.loadStatistics(timestamp);
-    return res.status(200).json(createResponse(true, messages.successfullyLoadedStatistics(new Date()), statistics));
+    try {
+      const statistics = await this.service.loadStatistics(timestamp);
+      
+      return res.status(200).json(createResponse(true, messages.successfullyLoadedStatistics(new Date()), statistics));
+    } catch(error) {
+      console.error(error);
+
+      return res.status(500).json(createResponse(false, messages.failedToLoadStatistics(), null));
+    }
   }
 
   /**

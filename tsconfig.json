@@ -5,11 +5,12 @@
     "module": "commonjs",
 
     "outDir": "./dist",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "#config/*": ["src/config/*"],
-      "#common/*": ["src/common/*"],
-      "#api/*": ["src/api/*"]
+      "@config/*": ["src/config/*"],
+      "@common/*": ["src/common/*"],
+      "@database/*": ["src/database/*"],
+      "@api/*": ["src/api/*"]
     },
 
     "strict": true,
