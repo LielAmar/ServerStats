@@ -53,19 +53,26 @@ export class Authorization {
     if(game_servers.last_update === null || game_servers.data === {} || Date.now() - game_servers.last_update > 1800000) await cacheGameServersFile(); // Caching the game_servers.json file
 
     // Trying to find the matching game server from the game_servers cached data. If no server was found we return a failure
-    let serverData = {};
+    let serverData;
 
     for(var i = 0; i < game_servers.data.servers.length; i++) {
       if(game_servers.data.servers[i].token === token) {
+        // First init of serverData to make sure we don't append to an undefined object
+        if(!serverData)
+          serverData = {};
+        
         serverData = game_servers.data.servers[i];
         break;
       }
     }
 
-    if(serverData === {}) return res.status(404).json(createResponse(false, messages.failedToLoadGameServerData()));
+    // If serverData is undefined, it means there's no server attached to the given token, meaning the token is invalid.
+    // In this case, we want to check whether it's the MASTER_TOKEN. If not, we simply return a failed message, otherwise, we continue with the request.
+    if(!serverData && token !== process.env.MASTER_TOKEN)
+      return res.status(404).json(createResponse(false, messages.failedToLoadGameServerData()));
 
     req.serverToken = token;
-    req.serverData = game_servers.data.servers;
+    req.serverData = serverData;
 
     next();
   }

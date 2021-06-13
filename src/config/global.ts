@@ -6,7 +6,8 @@ const messages = {
   missingRequestToken: (): string => `Missing Request Token`,
   failedToLoadGameServerData: (): string => `Failed to load game server data`,
   missingOneOrMoreFields: (): string => `Missing one or more fields in your request`,
-  failedToLoadStatistics: (): string => `The server failed to load statistics`
+  failedToLoadStatistics: (): string => `The server failed to load statistics`,
+  failedToUpdateStatistics: (): string => `The server failed to update statistics`
 }
 
 export { messages }

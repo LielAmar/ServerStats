@@ -22,7 +22,7 @@ export class StatisticsController {
     let timestamp = req.params.timestamp ? parseInt(req.params.timestamp) * 1000 : Date.now();
 
     try {
-      const statistics = await this.service.loadStatistics(timestamp);
+      const statistics = await this.service.loadStatistics(timestamp, req.serverToken);
       
       return res.status(200).json(createResponse(true, messages.successfullyLoadedStatistics(new Date()), statistics));
     } catch(error) {
@@ -43,10 +43,16 @@ export class StatisticsController {
   public async updateStatistics(req: Request, res: Response, next: NextFunction) {
     if(!req.serverToken || !req.serverData) return res.status(400).json(createResponse(false, messages.failedToLoadGameServerData()));
 
-    const { user_identifier, user_address } = req.body;
-    if(!user_identifier || !user_address) return res.status(400).json(createResponse(false, messages.missingOneOrMoreFields()));
+    const { player_identifier, player_address } = req.body;
+    if(!player_identifier || !player_address) return res.status(400).json(createResponse(false, messages.missingOneOrMoreFields()));
 
-    this.service.updateStatistics(user_identifier, user_address);
-    return res.status(200).json(createResponse(true, messages.successfullyUpdatedStatistics(), null));
+    try {
+      await this.service.updateStatistics(req.serverToken, req.serverData.community, req.serverData.address, player_identifier, player_address);
+      return res.status(200).json(createResponse(true, messages.successfullyUpdatedStatistics(), null));
+    } catch(error) {
+      console.error(error);
+
+      return res.status(500).json(createResponse(false, messages.failedToUpdateStatistics(), null));
+    }
   }
 }
