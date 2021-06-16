@@ -22,7 +22,7 @@ const game_servers = <IGameServer> {
  */
 const cacheGameServersFile = async (): Promise<void> => {
   return new Promise((resolve, reject) => {
-    https.get(config.game_servers_json_endpoint, (res) => {
+    https.get(config.game_servers_json_endpoint, { headers: { 'Authorization': config.game_servers_json_auth } },(res) => {
       let data = "";
   
       res.on("data", (chunk) => data += chunk);
