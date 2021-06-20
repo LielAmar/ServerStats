@@ -1,4 +1,4 @@
-const maxDatesInArray = process.env.MAX_DAYS_QUERIED_AT_ONE ? parseInt(process.env.MAX_DAYS_QUERIED_AT_ONE) : 100;
+const maxDatesInArray = process.env.MAX_DAYS_QUERIED_AT_ONCE ? parseInt(process.env.MAX_DAYS_QUERIED_AT_ONCE) : 100;
 
 /**
  * Returns an array of dates between startDate and stopDate

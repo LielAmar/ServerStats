@@ -1,0 +1,23 @@
+{
+  "last_update": 1623264018,
+  "servers": [
+    {
+      "game": "Counter-Strike: Global Offensive",
+      "address": "0.0.0.0:10000",
+      "status": true,
+      "token": "CSGO_TOKEN"
+    },
+    {
+      "game": "Minecraft: Java Edition",
+      "address": "0.0.0.0:25565",
+      "status": true,
+      "token": "MINECRAFT_TOKEN"
+    },
+    {
+      "game": "GTA 5 - FiveM",
+      "address": "0.0.0.0:30120",
+      "status": false,
+      "token": "FIVEM_TOKEN"
+    }
+  ]
+}
