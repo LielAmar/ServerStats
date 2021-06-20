@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-       dotenv.config();
 
 const __production__ = process.env.ENVIRONMENT === "production";
 
@@ -23,11 +22,18 @@ interface IConfig {
   game_servers_json_auth: string
 }
 
-const config = {
+export const config = {
   __production__,
   server: SERVER,
   game_servers_json_endpoint: GAME_SERVERS_ENDPOINT,
   game_servers_json_auth: GAME_SERVERS_ENDPOINT_AUTHORIZATION
 } as IConfig
 
-export default config;
+export default () => {
+  dotenv.config();
+
+  console.debug = (message) => {
+    if(process.env.ENVIRONMENT === "testing")
+      process.stdout.write(`[DEBUG] ${message}\n`);
+  }
+}

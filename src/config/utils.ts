@@ -10,10 +10,6 @@ const maxDatesInArray = process.env.MAX_DAYS_QUERIED_AT_ONCE ? parseInt(process.
 const getDates = (startDate: Date, stopDate: Date) => {
   // If startDate is after the stopDate swap them
   if(stopDate < startDate) {
-    console.log("it happened!");
-    console.log(startDate);
-    console.log(stopDate);
-
     let tmpDate = startDate;
     startDate = stopDate;
     stopDate = tmpDate;

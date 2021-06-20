@@ -2,7 +2,7 @@ import https from "https";
 
 import { Request, Response, NextFunction } from "express";
 
-import config from "../../../config/config";
+import { config } from "../../../config/config";
 import { messages } from "../../../config/global";
 import { createResponse } from "../../../config/response";
 
