@@ -1,10 +1,11 @@
 import https from "https";
 
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 
 import { config } from "../../../config/config";
 import { messages } from "../../../config/global";
 import { createResponse } from "../../../config/response";
+import { APIRequest } from "../APIRequest";
 
 interface IGameServer {
   last_update: number
@@ -45,7 +46,7 @@ const cacheGameServersFile = async (): Promise<void> => {
  * If there's a problem with the authentication, return an error to the user, otherwise, set #serverToken and #serverData on the request and call #next to continue with the request
  */
 export class Authorization {
-  public async authorize(req: Request, res: Response, next: NextFunction) {
+  public async authorize(req: APIRequest, res: Response, next: NextFunction) {
     const token = req.headers.authorization;
 
     if(!token) return res.status(400).json(createResponse(false, messages.missingRequestToken())); // If no token was provided

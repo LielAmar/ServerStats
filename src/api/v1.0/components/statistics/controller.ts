@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 
 import { createResponse } from "../../../../config/response";
 import { messages } from "../../../../config/global";
 
 import { StatisticsService } from "./service";
+import { APIRequest } from "@api/v1.0/APIRequest";
 
 export class StatisticsController {
   private readonly service: StatisticsService = new StatisticsService();
@@ -16,7 +17,7 @@ export class StatisticsController {
    * @next   Next function
    * @return JSON response
    */
-  public async loadStatistics(req: Request, res: Response, next: NextFunction) {
+  public async loadStatistics(req: APIRequest, res: Response, next: NextFunction) {
     if(!req.serverToken || !req.serverData) return res.status(400).json(createResponse(false, messages.failedToLoadGameServerData()));
 
     let timestamp = req.params.timestamp ? parseInt(req.params.timestamp) * 1000 : Date.now();
@@ -41,7 +42,7 @@ export class StatisticsController {
    * @next   Next function
    * @return JSON response
    */
-  public async updateStatistics(req: Request, res: Response, next: NextFunction) {
+  public async updateStatistics(req: APIRequest, res: Response, next: NextFunction) {
     if(!req.serverToken || !req.serverData) return res.status(400).json(createResponse(false, messages.failedToLoadGameServerData()));
 
     const { player_identifier, player_address } = req.body;

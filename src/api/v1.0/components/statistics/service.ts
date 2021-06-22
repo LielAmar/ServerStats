@@ -57,6 +57,16 @@ export class StatisticsService {
     });
   }
 
+  /**
+   * Updates statistics in the database
+   * 
+   * @param serverToken         Token of the server to be quried
+   * @param community           Community of the server
+   * @param full_address        Full address of the server
+   * @param player_identifier   Identifier of the player
+   * @param player_address      Address of the player
+   * @returns                   A promise with an object representing the data in the database
+   */
   public updateStatistics(serverToken: string, community: string, full_address: string, player_identifier: string, player_address: string): Promise<object[]> {
     return new Promise(async (resolve, reject) => {
       if(!query || query === null)
