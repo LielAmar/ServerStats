@@ -8,7 +8,7 @@ import helmet from "helmet";
 
 import errors from "./common/errors";
 
-import { config } from "./config/config";
+import config from "./config/config";
 
 import api_v1_0 from "./api/v1.0/api";
 
